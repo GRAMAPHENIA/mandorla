@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Mandorla Brand Colors - Light Mode */
+    --mandorla-cream: 240 15% 92%; /* #f0ede8 */
+    --mandorla-warm-brown: 25 35% 45%; /* #a67c52 */
+    --mandorla-dark-brown: 20 25% 25%; /* #4a3d32 */
+    --mandorla-off-white: 40 20% 96%; /* #f7f5f2 */
+
+    --background: var(--mandorla-off-white);
+    --foreground: var(--mandorla-dark-brown);
+    --card: var(--mandorla-cream);
+    --card-foreground: var(--mandorla-dark-brown);
+    --popover: var(--mandorla-off-white);
+    --popover-foreground: var(--mandorla-dark-brown);
+    --primary: var(--mandorla-warm-brown);
+    --primary-foreground: var(--mandorla-off-white);
+    --secondary: var(--mandorla-cream);
+    --secondary-foreground: var(--mandorla-dark-brown);
+    --muted: var(--mandorla-cream);
+    --muted-foreground: 20 15% 55%;
+    --accent: var(--mandorla-cream);
+    --accent-foreground: var(--mandorla-dark-brown);
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--mandorla-off-white);
+    --border: 20 15% 85%;
+    --input: 20 15% 85%;
+    --ring: var(--mandorla-warm-brown);
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode Variations */
+    --background: 20 25% 8%; /* #1a1612 */
+    --foreground: var(--mandorla-off-white);
+    --card: 20 25% 12%; /* #241f1a */
+    --card-foreground: var(--mandorla-off-white);
+    --popover: 20 25% 12%;
+    --popover-foreground: var(--mandorla-off-white);
+    --primary: var(--mandorla-warm-brown);
+    --primary-foreground: var(--mandorla-off-white);
+    --secondary: 20 25% 15%;
+    --secondary-foreground: var(--mandorla-off-white);
+    --muted: 20 25% 15%;
+    --muted-foreground: 20 15% 65%;
+    --accent: 20 25% 15%;
+    --accent-foreground: var(--mandorla-off-white);
+    --destructive: 0 62% 50%;
+    --destructive-foreground: var(--mandorla-off-white);
+    --border: 20 25% 20%;
+    --input: 20 25% 20%;
+    --ring: var(--mandorla-warm-brown);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Mandorla Styles */
+.mandorla-gradient {
+  background: linear-gradient(135deg, hsl(var(--mandorla-cream)), hsl(var(--mandorla-off-white)));
+}
+
+.mandorla-text-gradient {
+  background: linear-gradient(135deg, hsl(var(--mandorla-warm-brown)), hsl(var(--mandorla-dark-brown)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
