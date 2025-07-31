@@ -1,14 +1,19 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { useState } from "react";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../../components/ui/textarea";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -17,13 +22,13 @@ export default function ContactPage() {
     phone: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Create email body
     const emailBody = `
@@ -39,34 +44,38 @@ Mensaje:
 ${formData.message}
 
 Fecha: ${new Date().toLocaleString()}
-    `
+    `;
 
     // Create mailto link
-    const mailtoLink = `mailto:dicoratojuanpablo@gmail.com?subject=Contacto - ${formData.subject}&body=${encodeURIComponent(emailBody)}`
+    const mailtoLink = `mailto:dicoratojuanpablo@gmail.com?subject=Contacto - ${
+      formData.subject
+    }&body=${encodeURIComponent(emailBody)}`;
 
     // Open email client
-    window.location.href = mailtoLink
+    window.location.href = mailtoLink;
 
     // Reset form after submission
     setTimeout(() => {
-      setIsSubmitted(true)
-      setIsSubmitting(false)
+      setIsSubmitted(true);
+      setIsSubmitting(false);
       setFormData({
         name: "",
         email: "",
         phone: "",
         subject: "",
         message: "",
-      })
-    }, 1000)
-  }
+      });
+    }, 1000);
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -76,8 +85,9 @@ Fecha: ${new Date().toLocaleString()}
           <span className="mandorla-text-gradient">Contáctanos</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          ¿Tienes alguna pregunta sobre nuestros productos o quieres hacer un pedido especial? Estamos aquí para
-          ayudarte. ¡Nos encanta escuchar de nuestros clientes!
+          ¿Tienes alguna pregunta sobre nuestros productos o quieres hacer un
+          pedido especial? Estamos aquí para ayudarte. ¡Nos encanta escuchar de
+          nuestros clientes!
         </p>
       </div>
 
@@ -91,9 +101,17 @@ Fecha: ${new Date().toLocaleString()}
             {isSubmitted ? (
               <div className="text-center py-8">
                 <div className="text-green-600 text-6xl mb-4">✓</div>
-                <h3 className="text-xl font-semibold mb-2">¡Mensaje Enviado!</h3>
-                <p className="text-muted-foreground">Gracias por contactarnos. Te responderemos lo antes posible.</p>
-                <Button onClick={() => setIsSubmitted(false)} className="mt-4" variant="outline">
+                <h3 className="text-xl font-semibold mb-2">
+                  ¡Mensaje Enviado!
+                </h3>
+                <p className="text-muted-foreground">
+                  Gracias por contactarnos. Te responderemos lo antes posible.
+                </p>
+                <Button
+                  onClick={() => setIsSubmitted(false)}
+                  className="mt-4"
+                  variant="outline"
+                >
                   Enviar Otro Mensaje
                 </Button>
               </div>
@@ -163,7 +181,12 @@ Fecha: ${new Date().toLocaleString()}
                   />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  size="lg"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
                 </Button>
               </form>
@@ -204,7 +227,9 @@ Fecha: ${new Date().toLocaleString()}
                 <Mail className="h-5 w-5 text-primary mt-1" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-muted-foreground">dicoratojuanpablo@gmail.com</p>
+                  <p className="text-muted-foreground">
+                    dicoratojuanpablo@gmail.com
+                  </p>
                 </div>
               </div>
 
@@ -227,7 +252,9 @@ Fecha: ${new Date().toLocaleString()}
               <CardTitle>Pedidos Especiales</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground mb-4">¿Necesitas galletas para un evento especial? Ofrecemos:</p>
+              <p className="text-muted-foreground mb-4">
+                ¿Necesitas galletas para un evento especial? Ofrecemos:
+              </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li>• Galletas personalizadas para bodas</li>
                 <li>• Paquetes para fiestas infantiles</li>
@@ -236,7 +263,8 @@ Fecha: ${new Date().toLocaleString()}
                 <li>• Opciones sin gluten y veganas</li>
               </ul>
               <p className="text-sm text-muted-foreground mt-4">
-                <strong>Nota:</strong> Los pedidos especiales requieren al menos 48 horas de anticipación.
+                <strong>Nota:</strong> Los pedidos especiales requieren al menos
+                48 horas de anticipación.
               </p>
             </CardContent>
           </Card>
@@ -247,7 +275,8 @@ Fecha: ${new Date().toLocaleString()}
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                Mantente al día con nuestras últimas creaciones y ofertas especiales:
+                Mantente al día con nuestras últimas creaciones y ofertas
+                especiales:
               </p>
               <div className="flex space-x-4">
                 <Button variant="outline" size="sm">
@@ -265,5 +294,5 @@ Fecha: ${new Date().toLocaleString()}
         </div>
       </div>
     </div>
-  )
+  );
 }
