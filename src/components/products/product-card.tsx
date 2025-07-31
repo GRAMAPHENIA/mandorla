@@ -47,12 +47,17 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             variant="ghost"
             size="icon"
-            className={`absolute top-2 right-2 ${
-              isFavorite ? "text-red-500" : "text-gray-500"
-            } hover:text-red-500`}
+            className="absolute top-2 right-2 text-foreground/50 hover:text-foreground/80 hover:bg-transparent"
             onClick={handleToggleFavorite}
           >
-            <Heart className={`h-5 w-5 ${isFavorite ? "fill-current" : ""}`} />
+            <Heart
+              className={`h-5 w-5 ${
+                isFavorite
+                  ? "fill-[#D6BD98] text-[#a9977c]"
+                  : "text-[#4b4133] p-4 rounded-lg"
+              }`}
+              strokeWidth={isFavorite ? 1.5 : 1}
+            />
           </Button>
         </div>
 

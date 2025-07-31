@@ -4,55 +4,61 @@
 
 @layer base {
   :root {
-    /* Mandorla Brand Colors - Light Mode */
-    --mandorla-cream: 240 15% 92%; /* #f0ede8 */
-    --mandorla-warm-brown: 25 35% 45%; /* #a67c52 */
-    --mandorla-dark-brown: 20 25% 25%; /* #4a3d32 */
-    --mandorla-off-white: 40 20% 96%; /* #f7f5f2 */
+    /* Paleta de colores principal - Versión Premium */
+    --beige: 37 44% 79%; /* #D6BD98 - Color principal */
+    --verde-medio: 128 9% 41%; /* #677D6A - Verde medio */
+    --verde-oscuro: 158 13% 26%; /* #40534C - Verde oscuro */
+    --petroleo: 180 36% 15%; /* #1A3636 - Petróleo */
 
-    --background: var(--mandorla-off-white);
-    --foreground: var(--mandorla-dark-brown);
-    --card: var(--mandorla-cream);
-    --card-foreground: var(--mandorla-dark-brown);
-    --popover: var(--mandorla-off-white);
-    --popover-foreground: var(--mandorla-dark-brown);
-    --primary: var(--mandorla-warm-brown);
-    --primary-foreground: var(--mandorla-off-white);
-    --secondary: var(--mandorla-cream);
-    --secondary-foreground: var(--mandorla-dark-brown);
-    --muted: var(--mandorla-cream);
-    --muted-foreground: 20 15% 55%;
-    --accent: var(--mandorla-cream);
-    --accent-foreground: var(--mandorla-dark-brown);
-    --destructive: 0 84% 60%;
-    --destructive-foreground: var(--mandorla-off-white);
-    --border: 20 15% 85%;
-    --input: 20 15% 85%;
-    --ring: var(--mandorla-warm-brown);
-    --radius: 0.5rem;
+    /* Colores adicionales */
+    --blanco: 0 0% 100%;
+    --gris-oscuro: 0 0% 10%;
+    --gris-claro: 0 0% 96%;
+
+    /* Modo Claro - Versión Premium */
+    --background: var(--blanco);
+    --foreground: var(--gris-oscuro);
+    --card: var(--blanco);
+    --card-foreground: var(--gris-oscuro);
+    --popover: var(--blanco);
+    --popover-foreground: var(--gris-oscuro);
+    --primary: var(--verde-oscuro);
+    --primary-foreground: var(--blanco);
+    --secondary: var(--beige);
+    --secondary-foreground: var(--gris-oscuro);
+    --muted: 0 0% 98%;
+    --muted-foreground: 0 0% 40%;
+    --accent: var(--beige);
+    --accent-foreground: var(--gris-oscuro);
+    --destructive: 0 72% 51%;
+    --destructive-foreground: var(--blanco);
+    --border: 0 0% 92%;
+    --input: 0 0% 95%;
+    --ring: var(--verde-medio);
+    --radius: 0.6rem;
   }
 
   .dark {
-    /* Dark Mode Variations */
-    --background: 20 25% 8%; /* #1a1612 */
-    --foreground: var(--mandorla-off-white);
-    --card: 20 25% 12%; /* #241f1a */
-    --card-foreground: var(--mandorla-off-white);
-    --popover: 20 25% 12%;
-    --popover-foreground: var(--mandorla-off-white);
-    --primary: var(--mandorla-warm-brown);
-    --primary-foreground: var(--mandorla-off-white);
-    --secondary: 20 25% 15%;
-    --secondary-foreground: var(--mandorla-off-white);
-    --muted: 20 25% 15%;
-    --muted-foreground: 20 15% 65%;
-    --accent: 20 25% 15%;
-    --accent-foreground: var(--mandorla-off-white);
-    --destructive: 0 62% 50%;
-    --destructive-foreground: var(--mandorla-off-white);
-    --border: 20 25% 20%;
-    --input: 20 25% 20%;
-    --ring: var(--mandorla-warm-brown);
+    /* Modo Oscuro - Versión Premium */
+    --background: var(--petroleo);
+    --foreground: 0 0% 98%;
+    --card: var(--petroleo);
+    --card-foreground: 0 0% 98%;
+    --popover: var(--petroleo);
+    --popover-foreground: 0 0% 98%;
+    --primary: var(--beige);
+    --primary-foreground: var(--gris-oscuro);
+    --secondary: var(--verde-oscuro);
+    --secondary-foreground: 0 0% 98%;
+    --muted: 180 15% 18%;
+    --muted-foreground: 0 0% 75%;
+    --accent: var(--verde-oscuro);
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 15% 22%;
+    --input: 180 15% 22%;
+    --ring: var(--beige);
   }
 }
 
@@ -60,19 +66,168 @@
   * {
     @apply border-border;
   }
+
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans font-bold tracking-tight leading-tight;
+    font-variation-settings: "wght" 700;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  p {
+    @apply leading-relaxed text-foreground/90;
+  }
+
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose p {
+    @apply my-4;
+  }
+
+  .prose a {
+    @apply text-primary underline-offset-4 hover:underline;
   }
 }
 
-/* Custom Mandorla Styles */
+/* Efectos y componentes personalizados */
+.card {
+  @apply rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2;
+}
+
+/* Gradientes personalizados */
 .mandorla-gradient {
-  background: linear-gradient(135deg, hsl(var(--mandorla-cream)), hsl(var(--mandorla-off-white)));
+  background: linear-gradient(
+    152deg,
+    hsl(var(--blanco) / 0.98) 0%,
+    hsl(var(--beige) / 0.15) 100%
+  );
+  backdrop-filter: blur(4px);
+}
+
+.dark .mandorla-gradient {
+  background: linear-gradient(
+    152deg,
+    hsl(var(--petroleo) / 0.98) 0%,
+    hsl(180 30% 8% / 0.95) 100%
+  );
+  backdrop-filter: blur(6px);
 }
 
 .mandorla-text-gradient {
-  background: linear-gradient(135deg, hsl(var(--mandorla-warm-brown)), hsl(var(--mandorla-dark-brown)));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--verde-oscuro) / 0.9),
+    hsl(var(--verde-medio) / 0.9)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
+}
+
+.dark .mandorla-text-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--beige) / 0.95),
+    hsl(var(--beige) / 0.7)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Efectos de hover y focus */
+.link-underline {
+  @apply relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+}
+
+/* Animaciones sutiles */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  @apply w-2.5 h-2.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-foreground/15 rounded-full hover:bg-foreground/25 transition-colors;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Clases de utilidad personalizadas */
+.text-balance {
+  text-wrap: balance;
+}
+
+.inset-shadow {
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+.dark .inset-shadow {
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.2);
 }
