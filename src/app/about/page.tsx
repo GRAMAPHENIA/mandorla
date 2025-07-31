@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Card, CardContent } from "../../components/ui/card";
-import { Leaf, ChefHat, Heart, Sparkles } from "lucide-react";
+import { Leaf, ChefHat, Heart } from "lucide-react";
+import { SectionTitle } from "../../components/ui/section-title";
+
 
 export const metadata = {
   title: "Acerca de Nosotros - Panadería Mandorla",
@@ -12,14 +14,15 @@ export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Hero Section */}
-      <div className="text-center mb-16">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-          Nuestra <span className="mandorla-text-gradient">Historia</span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Desde 1995, Panadería Mandorla ha sido sinónimo de tradición, calidad
-          y sabor auténtico en cada galleta que horneamos.
-        </p>
+      <div className="container mx-auto px-2 py-8 mt-4 md:py-24">
+        <SectionTitle
+          title="Nuestra "
+          gradientText="Historia"
+          subtitle="Desde 1995, Panadería Mandorla ha sido sinónimo de tradición, calidad y sabor auténtico en cada galleta que horneamos."
+          align="left"
+          titleClassName="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight"
+          subtitleClassName="text-lg md:text-xl text-muted-foreground max-w-3xl"
+        />
       </div>
 
       {/* Main Story */}
@@ -59,9 +62,15 @@ export default function AboutPage() {
 
       {/* Values Section */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Nuestros Valores
-        </h2>
+        <SectionTitle
+          title="Nuestros"
+          gradientText="Valores"
+          subtitle="Lo que nos define y guía en cada paso de nuestro proceso de elaboración"
+          align="left"
+          className="mb-12"
+          titleClassName="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+          subtitleClassName="text-lg md:text-xl text-muted-foreground max-w-3xl"
+        />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
             <CardContent className="p-6 text-center h-full flex flex-col items-center">
@@ -112,7 +121,15 @@ export default function AboutPage() {
 
       {/* Team Section */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Nuestro Equipo</h2>
+        <SectionTitle
+          title="Nuestro"
+          gradientText="Equipo"
+          subtitle="Nuestro equipo es el corazón de nuestra panadería, cada miembro contribuye a crear un producto excepcional."
+          align="left"
+          className="mb-12"
+          titleClassName="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+          subtitleClassName="text-lg md:text-xl text-muted-foreground max-w-3xl"
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card>
             <CardContent className="p-6 text-center">
