@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ShoppingCart, Heart, Menu, Sun, Moon, X } from "lucide-react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "../ui/sheet";
@@ -10,6 +9,7 @@ import { useCartStore } from "../../stores/cart-store";
 import { useFavoritesStore } from "../../stores/favorites-store";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Logo } from "../ui/logo";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -47,9 +47,8 @@ export function Header() {
 
   return (
     <>
-      {/* Header principal */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed mx-12 mt-6 rounded-lg top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-background/90 backdrop-blur-md border-b border-border/40 shadow-sm"
             : "bg-background/80 backdrop-blur-md border-b border-transparent"
@@ -59,18 +58,11 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <div className="relative h-8 w-8 transition-transform duration-300 group-hover:rotate-6">
-                <Image
-                  src="/images/logo.png"
-                  alt="Panadería Mandorla"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <span className="ml-2 text-lg font-medium text-foreground/90">
-                Mandorla
-              </span>
+              <Logo
+                className="transition-transform duration-300 group-hover:rotate-6"
+                width={32}
+                height={32}
+              />
             </Link>
 
             {/* Navegación desktop */}
@@ -170,14 +162,7 @@ export function Header() {
                             )
                           }
                         >
-                          <div className="relative h-7 w-7 mr-2">
-                            <Image
-                              src="/images/logo.png"
-                              alt="Panadería Mandorla"
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
+                          <Logo width={28} height={28} className="mr-2" />
                           <span className="text-lg font-medium">Mandorla</span>
                         </Link>
                         <SheetClose asChild>
@@ -240,8 +225,6 @@ export function Header() {
         </div>
       </header>
 
-      {/* Espacio reservado para el header */}
-      <div className="h-16" />
     </>
   );
 }
