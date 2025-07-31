@@ -1,9 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Heart, Menu, Sun, Moon, X } from "lucide-react";
+import {
+  ShoppingCart,
+  Heart,
+  Menu,
+  Sun,
+  Moon,
+  X,
+  Home,
+  Cookie,
+  Info,
+  Mail,
+} from "lucide-react";
 import { Button } from "../ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "../ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+  SheetTitle,
+  SheetHeader,
+} from "../ui/sheet";
 import { useTheme } from "next-themes";
 import { useCartStore } from "../../stores/cart-store";
 import { useFavoritesStore } from "../../stores/favorites-store";
@@ -17,38 +35,46 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const cartItems = useCartStore((state) => state.items);
   const favoriteItems = useFavoritesStore((state) => state.items);
-
-  // Efecto para manejar el scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    // Agregar el event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Limpiar el event listener al desmontar
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const cartItemsCount = cartItems.reduce(
     (total: number, item: { quantity: number }) => total + item.quantity,
     0
   );
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navigation = [
-    { name: "Inicio", href: "/" },
-    { name: "Productos", href: "/products" },
-    { name: "Acerca de", href: "/about" },
-    { name: "Contacto", href: "/contact" },
+    { name: "Inicio", href: "/", icon: <Home className="mr-2 h-5 w-5" /> },
+    {
+      name: "Productos",
+      href: "/products",
+      icon: <Cookie className="mr-2 h-5 w-5" />,
+    },
+    {
+      name: "Acerca de",
+      href: "/about",
+      icon: <Info className="mr-2 h-5 w-5" />,
+    },
+    {
+      name: "Contacto",
+      href: "/contact",
+      icon: <Mail className="mr-2 h-5 w-5" />,
+    },
   ];
 
   return (
     <>
       <header
-        className={`fixed mx-12 mt-6 rounded-lg top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed m-2 md:mx-12 rounded-lg top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-background/90 backdrop-blur-md border-b border-border/40 shadow-sm"
             : "bg-background/80 backdrop-blur-md border-b border-transparent"
@@ -89,8 +115,8 @@ export function Header() {
               })}
             </nav>
 
-            {/* Acciones */}
-            <div className="flex items-center space-x-2">
+            {/* Acciones - Solo se muestra en desktop */}
+            <div className="hidden md:flex items-center space-x-2">
               <Button
                 variant="ghost"
                 size="icon"
@@ -133,14 +159,16 @@ export function Header() {
                   )}
                 </Button>
               </Link>
+            </div>
 
-              {/* Menú móvil */}
+            {/* Menú móvil - Solo botón de menú */}
+            <div className="md:hidden">
               <Sheet>
                 <SheetTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="md:hidden text-foreground/80 hover:text-foreground hover:bg-foreground/5"
+                    className="text-foreground/80 hover:text-foreground hover:bg-foreground/5"
                     aria-label="Menú"
                   >
                     <Menu className="h-5 w-5" />
@@ -148,75 +176,93 @@ export function Header() {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="w-[280px] sm:w-[350px] p-0"
+                  className="w-[280px] sm:w-[350px] p-0 flex flex-col"
                 >
-                  <div className="flex flex-col h-full">
-                    <div className="p-4 border-b border-border/40">
-                      <div className="flex items-center justify-between">
-                        <Link
-                          href="/"
-                          className="flex items-center"
-                          onClick={() =>
-                            document.dispatchEvent(
-                              new KeyboardEvent("keydown", { key: "Escape" })
-                            )
-                          }
-                        >
-                          <Logo width={28} height={28} className="mr-2" />
-                          <span className="text-lg font-medium">Mandorla</span>
-                        </Link>
-                        <SheetClose asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8"
+                  <SheetHeader className="p-4 border-b border-border/40">
+                    <div className="flex items-center">
+                      <Logo width={20} height={20} className="mr-2" />
+                      <SheetTitle className="sr-only">
+                        Menú de navegación
+                      </SheetTitle>
+                    </div>
+                  </SheetHeader>
+
+                  {/* Navegación móvil */}
+                  <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+                    {navigation.map((item) => {
+                      const isActive =
+                        pathname === item.href ||
+                        (item.href !== "/" && pathname.startsWith(item.href));
+
+                      return (
+                        <SheetClose asChild key={item.name}>
+                          <Link
+                            href={item.href}
+                            className={`flex items-center h-12 px-4 rounded-lg transition-colors
+                                      ${
+                                        isActive
+                                          ? "text-[#D6BD98] bg-foreground/5"
+                                          : "text-foreground/80 hover:text-foreground hover:bg-foreground/5"
+                                      }`}
                           >
-                            <X className="h-5 w-5" />
-                          </Button>
+                            {item.icon}
+                            {item.name}
+                          </Link>
                         </SheetClose>
-                      </div>
-                    </div>
+                      );
+                    })}
+                  </nav>
 
-                    <nav className="flex-1 p-4 space-y-2">
-                      {navigation.map((item) => {
-                        const isActive =
-                          pathname === item.href ||
-                          (item.href !== "/" && pathname.startsWith(item.href));
+                  {/* Acciones móviles */}
+                  <div className="border-t border-border/40 p-4 space-y-2">
+                    <SheetClose asChild>
+                      <Link href="/favorites" className="block">
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                        >
+                          <Heart className="mr-2 h-5 w-5" />
+                          Favoritos
+                          {favoriteItems.length > 0 && (
+                            <span className="ml-auto bg-[#D6BD98] text-[#1A3636] text-xs font-medium px-2 py-0.5 rounded-full">
+                              {favoriteItems.length}
+                            </span>
+                          )}
+                        </Button>
+                      </Link>
+                    </SheetClose>
 
-                        return (
-                          <SheetClose asChild key={item.name}>
-                            <Link
-                              href={item.href}
-                              className={`flex items-center h-12 px-4 rounded-lg transition-colors
-                                        ${
-                                          isActive
-                                            ? "text-[#D6BD98]"
-                                            : "text-foreground/80 hover:text-foreground hover:bg-foreground/5"
-                                        }`}
-                            >
-                              {item.name}
-                            </Link>
-                          </SheetClose>
-                        );
-                      })}
-                    </nav>
+                    <SheetClose asChild>
+                      <Link href="/cart" className="block">
+                        <Button
+                          variant="ghost"
+                          className="w-full justify-start"
+                        >
+                          <ShoppingCart className="mr-2 h-5 w-5" />
+                          Carrito
+                          {cartItemsCount > 0 && (
+                            <span className="ml-auto bg-[#D6BD98] text-[#1A3636] text-xs font-medium px-2 py-0.5 rounded-full">
+                              {cartItemsCount}
+                            </span>
+                          )}
+                        </Button>
+                      </Link>
+                    </SheetClose>
 
-                    <div className="p-4 border-t border-border/40">
-                      <Button
-                        variant="outline"
-                        onClick={() =>
-                          setTheme(theme === "dark" ? "light" : "dark")
-                        }
-                        className="w-full justify-start text-foreground/80 hover:text-foreground"
-                      >
-                        {theme === "dark" ? (
-                          <Sun className="h-4 w-4 mr-2" />
-                        ) : (
-                          <Moon className="h-4 w-4 mr-2" />
-                        )}
-                        {theme === "dark" ? "Modo claro" : "Modo oscuro"}
-                      </Button>
-                    </div>
+                    <Button
+                      variant="outline"
+                      onClick={() =>
+                        setTheme(theme === "dark" ? "light" : "dark")
+                      }
+                      className="w-full justify-start"
+                    >
+                      {theme === "dark" ? (
+                        <Sun className="h-4 w-4 mr-2" />
+                      ) : (
+                        <Moon className="h-4 w-4 mr-2" />
+                      )}
+                      {theme === "dark" ? "Modo claro" : "Modo oscuro"}
+                    </Button>
                   </div>
                 </SheetContent>
               </Sheet>
@@ -224,7 +270,6 @@ export function Header() {
           </div>
         </div>
       </header>
-
     </>
   );
 }
