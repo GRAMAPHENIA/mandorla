@@ -1,78 +1,48 @@
-"use client"
+"use client";
 
-// Note: This is prepared for Zustand but doesn't import it
-// To use this, install Zustand: npm install zustand
-// Then uncomment the import and create statements below
-
-// import { create } from 'zustand'
-// import { persist } from 'zustand/middleware'
-import type { Product } from "@/types/product"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { toast } from "sonner";
+import type { Product } from "@/types/product";
 
 interface FavoritesStore {
-  items: Product[]
-  toggleItem: (product: Product) => void
-  removeItem: (productId: string) => void
-  clearFavorites: () => void
+  items: Product[];
+  toggleItem: (product: Product) => void;
+  removeItem: (productId: string) => void;
+  clearFavorites: () => void;
 }
 
-// Temporary mock implementation for development
-// Replace with actual Zustand store when ready
-export const useFavoritesStore = (() => {
-  let items: Product[] = []
-  const listeners: (() => void)[] = []
-
-  const notify = () => listeners.forEach((listener) => listener())
-
-  return (selector?: (state: FavoritesStore) => any) => {
-    const store: FavoritesStore = {
-      items,
-      toggleItem: (product: Product) => {
-        const existingIndex = items.findIndex((item) => item.id === product.id)
-        if (existingIndex >= 0) {
-          items.splice(existingIndex, 1)
-        } else {
-          items.push(product)
-        }
-        notify()
-      },
-      removeItem: (productId: string) => {
-        items = items.filter((item) => item.id !== productId)
-        notify()
-      },
-      clearFavorites: () => {
-        items = []
-        notify()
-      },
-    }
-
-    return selector ? selector(store) : store
-  }
-})()
-
-// Actual Zustand implementation (uncomment when ready to use):
-/*
 export const useFavoritesStore = create<FavoritesStore>()(
   persist(
     (set, get) => ({
       items: [],
       toggleItem: (product) => {
-        const items = get().items
-        const existingIndex = items.findIndex(item => item.id === product.id)
-        
+        const items = get().items;
+        const existingIndex = items.findIndex((item) => item.id === product.id);
+
         if (existingIndex >= 0) {
-          set({ items: items.filter(item => item.id !== product.id) })
+          set({ items: items.filter((item) => item.id !== product.id) });
+          toast.info(`${product.name} se ha eliminado de favoritos`);
         } else {
-          set({ items: [...items, product] })
+          set({ items: [...items, product] });
+          toast.success(`${product.name} se ha añadido a favoritos`);
         }
       },
       removeItem: (productId) => {
-        set({ items: get().items.filter(item => item.id !== productId) })
+        const items = get().items;
+        const item = items.find((item) => item.id === productId);
+        if (item) {
+          set({ items: items.filter((item) => item.id !== productId) });
+          toast.info(`${item.name} se ha eliminado de favoritos`);
+        }
       },
-      clearFavorites: () => set({ items: [] })
+      clearFavorites: () => {
+        set({ items: [] });
+        toast.info("Se han eliminado todos los favoritos");
+      },
     }),
     {
-      name: 'mandorla-favorites-storage',
+      name: "mandorla-favorites-storage",
     }
   )
-)
-*/
+);

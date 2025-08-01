@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {
   ShoppingCart,
-  Heart,
+  Heart as HeartIcon,
   Menu,
   Sun,
   Moon,
@@ -33,24 +33,37 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Obtener el estado del carrito y favoritos
   const cartItems = useCartStore((state) => state.items);
   const favoriteItems = useFavoritesStore((state) => state.items);
+
+  // Calcular totales
   const cartItemsCount = cartItems.reduce(
-    (total: number, item: { quantity: number }) => total + item.quantity,
+    (total, item) => total + (item.quantity || 1),
     0
   );
+  const favoritesCount = favoriteItems.length;
 
+  // Efecto para manejar el scroll y la hidratación
   useEffect(() => {
+    setIsMounted(true);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Evitar hidratación hasta que el componente esté montado en el cliente
+  if (!isMounted) {
+    return (
+      <header className="h-16">{/* Placeholder mientras se carga */}</header>
+    );
+  }
 
   const navigation = [
     { name: "Inicio", href: "/", icon: <Home className="mr-2 h-5 w-5" /> },
@@ -135,10 +148,10 @@ export function Header() {
                   className="relative text-foreground/80 hover:text-foreground hover:bg-foreground/5"
                   aria-label="Favoritos"
                 >
-                  <Heart className="h-5 w-5" />
-                  {favoriteItems.length > 0 && (
+                  <HeartIcon className="h-5 w-5" />
+                  {favoritesCount > 0 && (
                     <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#D6BD98] text-[10px] font-medium text-[#1A3636] flex items-center justify-center">
-                      {favoriteItems.length}
+                      {favoritesCount > 9 ? "9+" : favoritesCount}
                     </span>
                   )}
                 </Button>
@@ -154,7 +167,7 @@ export function Header() {
                   <ShoppingCart className="h-5 w-5" />
                   {cartItemsCount > 0 && (
                     <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#D6BD98] text-[10px] font-medium text-[#1A3636] flex items-center justify-center">
-                      {cartItemsCount}
+                      {cartItemsCount > 9 ? "9+" : cartItemsCount}
                     </span>
                   )}
                 </Button>
@@ -198,12 +211,11 @@ export function Header() {
                         <SheetClose asChild key={item.name}>
                           <Link
                             href={item.href}
-                            className={`flex items-center h-12 px-4 rounded-lg transition-colors
-                                      ${
-                                        isActive
-                                          ? "text-[#D6BD98] bg-foreground/5"
-                                          : "text-foreground/80 hover:text-foreground hover:bg-foreground/5"
-                                      }`}
+                            className={`flex items-center px-4 py-3 rounded-md text-sm font-medium ${
+                              isActive
+                                ? "bg-foreground/5 text-[#D6BD98]"
+                                : "text-foreground/80 hover:bg-foreground/5"
+                            }`}
                           >
                             {item.icon}
                             {item.name}
@@ -214,18 +226,37 @@ export function Header() {
                   </nav>
 
                   {/* Acciones móviles */}
-                  <div className="border-t border-border/40 p-4 space-y-2">
+                  <div className="p-4 border-t border-border/40 space-y-2">
+                    <div className="flex items-center justify-between px-4 py-2">
+                      <span className="text-sm font-medium">Tema</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          setTheme(theme === "dark" ? "light" : "dark")
+                        }
+                        className="text-foreground/80"
+                      >
+                        {theme === "dark" ? (
+                          <Sun className="h-4 w-4 mr-2" />
+                        ) : (
+                          <Moon className="h-4 w-4 mr-2" />
+                        )}
+                        {theme === "dark" ? "Claro" : "Oscuro"}
+                      </Button>
+                    </div>
+
                     <SheetClose asChild>
-                      <Link href="/favorites" className="block">
+                      <Link href="/favorites">
                         <Button
                           variant="ghost"
-                          className="w-full justify-start"
+                          className="w-full justify-start gap-2"
                         >
-                          <Heart className="mr-2 h-5 w-5" />
+                          <HeartIcon className="h-5 w-5" />
                           Favoritos
-                          {favoriteItems.length > 0 && (
+                          {favoritesCount > 0 && (
                             <span className="ml-auto bg-[#D6BD98] text-[#1A3636] text-xs font-medium px-2 py-0.5 rounded-full">
-                              {favoriteItems.length}
+                              {favoritesCount}
                             </span>
                           )}
                         </Button>
@@ -233,12 +264,12 @@ export function Header() {
                     </SheetClose>
 
                     <SheetClose asChild>
-                      <Link href="/cart" className="block">
+                      <Link href="/cart">
                         <Button
                           variant="ghost"
-                          className="w-full justify-start"
+                          className="w-full justify-start gap-2"
                         >
-                          <ShoppingCart className="mr-2 h-5 w-5" />
+                          <ShoppingCart className="h-5 w-5" />
                           Carrito
                           {cartItemsCount > 0 && (
                             <span className="ml-auto bg-[#D6BD98] text-[#1A3636] text-xs font-medium px-2 py-0.5 rounded-full">
@@ -248,21 +279,6 @@ export function Header() {
                         </Button>
                       </Link>
                     </SheetClose>
-
-                    <Button
-                      variant="outline"
-                      onClick={() =>
-                        setTheme(theme === "dark" ? "light" : "dark")
-                      }
-                      className="w-full justify-start"
-                    >
-                      {theme === "dark" ? (
-                        <Sun className="h-4 w-4 mr-2" />
-                      ) : (
-                        <Moon className="h-4 w-4 mr-2" />
-                      )}
-                      {theme === "dark" ? "Modo claro" : "Modo oscuro"}
-                    </Button>
                   </div>
                 </SheetContent>
               </Sheet>
@@ -270,6 +286,8 @@ export function Header() {
           </div>
         </div>
       </header>
+      {/* Espacio para el header fijo */}
+      <div className="h-16" />
     </>
   );
 }
