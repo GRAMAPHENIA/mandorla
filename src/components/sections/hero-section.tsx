@@ -11,7 +11,7 @@ export function HeroSection() {
       </div>
 
       {/* Contenido principal */}
-      <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
+      <div className="relative z-10 container mx-auto px-4 py-20 md:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Texto y CTA */}
           <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
@@ -20,7 +20,7 @@ export function HeroSection() {
                 <span className="mandorla-text-gradient">Mandorla</span>
               </span>
               <span className="block text-3xl md:text-4xl lg:text-5xl font-medium">
-              Bakery Cookies
+                Bakery Cookies
               </span>
             </h1>
 
@@ -45,12 +45,12 @@ export function HeroSection() {
           </div>
 
           {/* Imagen */}
-          <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full max-w-2xl mx-auto">
+          <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full max-w-2xl mx-auto rounded-2xl overflow-hidden">
             <Image
-              src="/placeholder.svg?height=500&width=500"
+              src="/heroSection/heroImage.jpeg"
               alt="Deliciosas galletas caseras"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </div>

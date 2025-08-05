@@ -13,7 +13,7 @@ export function FeaturedProducts() {
     <section className="py-16 md:py-24 bg-background/50">
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="Nuestras Galletas"
+          title="Nuestras Galletas "
           gradientText="Destacadas"
           subtitle="Descubre nuestras recetas más exquisitas, elaboradas con ingredientes naturales y mucho amor."
           align="center"

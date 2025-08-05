@@ -1,86 +1,50 @@
-"use client";
-
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { toast } from "sonner";
-import type { Product } from "@/types/product";
 
-export interface CartItem extends Product {
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
   quantity: number;
-}
+  image?: string;
+};
 
-interface CartStore {
+type CartStore = {
   items: CartItem[];
-  addItem: (product: Product) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addItem: (item: Omit<CartItem, "quantity">) => void;
+  removeItem: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
-  getTotalItems: () => number;
-  getTotalPrice: () => number;
-}
+};
 
-export const useCartStore = create<CartStore>()(
-  persist(
-    (set, get) => ({
-      items: [],
-      addItem: (product) => {
-        const items = get().items;
-        const existingItem = items.find((item) => item.id === product.id);
+export const useCartStore = create<CartStore>((set) => ({
+  items: [],
 
-        if (existingItem) {
-          set({
-            items: items.map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: item.quantity + 1 }
-                : item
-            ),
-          });
-          toast.success(
-            `Se ha actualizado la cantidad de ${product.name} en el carrito`
-          );
-        } else {
-          set({ items: [...items, { ...product, quantity: 1 }] });
-          toast.success(`${product.name} se ha añadido al carrito`);
-        }
-      },
-      removeItem: (productId) => {
-        const item = get().items.find((item) => item.id === productId);
-        if (item) {
-          set({ items: get().items.filter((item) => item.id !== productId) });
-          toast.info(`${item.name} se ha eliminado del carrito`);
-        }
-      },
-      updateQuantity: (productId, quantity) => {
-        if (quantity <= 0) {
-          get().removeItem(productId);
-          return;
-        }
-        const items = get().items;
-        const item = items.find((item) => item.id === productId);
-        if (item) {
-          set({
-            items: items.map((item) =>
-              item.id === productId ? { ...item, quantity } : item
-            ),
-          });
-        }
-      },
-      clearCart: () => {
-        set({ items: [] });
-        toast.info("El carrito se ha vaciado");
-      },
-      getTotalItems: () => {
-        return get().items.reduce((total, item) => total + item.quantity, 0);
-      },
-      getTotalPrice: () => {
-        return get().items.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        );
-      },
+  addItem: (item) =>
+    set((state) => {
+      const existingItem = state.items.find((i) => i.id === item.id);
+
+      if (existingItem) {
+        return {
+          items: state.items.map((i) =>
+            i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+          ),
+        };
+      }
+
+      return { items: [...state.items, { ...item, quantity: 1 }] };
     }),
-    {
-      name: "mandorla-cart-storage",
-    }
-  )
-);
+
+  removeItem: (id) =>
+    set((state) => ({
+      items: state.items.filter((item) => item.id !== id),
+    })),
+
+  updateQuantity: (id, quantity) =>
+    set((state) => ({
+      items: state.items.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      ),
+    })),
+
+  clearCart: () => set({ items: [] }),
+}));
