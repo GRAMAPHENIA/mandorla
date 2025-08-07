@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validador de Tipos TypeScript",
+  "description": "Hook que se activa al guardar archivos en la carpeta types/ para verificar documentación de interfaces, consistencia entre tipos relacionados, validación de tipos opcionales y sugerencias de extensiones",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "types/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza los archivos de tipos TypeScript modificados y realiza las siguientes validaciones:\n\n1. **Documentación de Interfaces**: Verifica que todas las interfaces tengan comentarios JSDoc explicando su propósito y cada propiedad importante.\n\n2. **Consistencia entre Tipos Relacionados**: \n   - Revisa que Product, CartItem, Customer y otros tipos relacionados mantengan consistencia en nombres de propiedades y tipos\n   - Verifica que las relaciones entre entidades (ej: CartItem debe referenciar Product correctamente) sean coherentes\n\n3. **Validación de Tipos Opcionales**:\n   - Confirma que las propiedades opcionales (?) estén marcadas correctamente según su uso en la aplicación\n   - Identifica propiedades que deberían ser opcionales pero no están marcadas como tal\n\n4. **Sugerencias de Extensiones**:\n   - Detecta patrones repetitivos entre interfaces que podrían beneficiarse de tipos base o utilidades\n   - Sugiere crear tipos genéricos o de utilidad para reducir duplicación\n   - Propone extensiones de interfaces cuando sea apropiado\n\nProporciona un reporte detallado en español con:\n- Problemas encontrados y su severidad\n- Sugerencias específicas de mejora\n- Ejemplos de código corregido cuando sea necesario\n- Recomendaciones para mantener la consistencia del sistema de tipos\n\nEnfócate en mantener la calidad del código TypeScript y la experiencia de desarrollo para el proyecto de e-commerce Mandorla."
+  }
+}

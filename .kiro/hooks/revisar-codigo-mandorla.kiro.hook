@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Revisar Código Mandorla",
+  "description": "Hook manual que revisa el archivo actualmente abierto en busca de inconsistencias con las convenciones del proyecto, verifica el uso correcto de colores de marca y componentes UI, sugiere mejoras de accesibilidad y rendimiento, valida mejores prácticas de React y Next.js, y proporciona sugerencias específicas para el contexto de e-commerce de panadería",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Revisa el archivo actualmente abierto para el proyecto Mandorla (e-commerce de panadería) y proporciona un análisis detallado en español que incluya:\n\n## 1. Convenciones del Proyecto\n- Verifica que siga la estructura de carpetas establecida (src/app/, src/components/, etc.)\n- Confirma el uso correcto de TypeScript y las definiciones de tipos\n- Revisa la implementación de Next.js 15 con App Router\n- Valida el uso de pnpm y las dependencias del proyecto\n\n## 2. Colores de Marca y Componentes UI\n- Verifica el uso de los colores de marca de Mandorla: crema mandorla, marrón cálido, marrón oscuro, blanco roto\n- Confirma el uso correcto de Tailwind CSS y las variables CSS personalizadas\n- Revisa la implementación de componentes shadcn/ui y Radix UI\n- Valida el soporte para tema oscuro/claro con next-themes\n\n## 3. Accesibilidad y Rendimiento\n- Sugiere mejoras de accesibilidad (ARIA labels, contraste, navegación por teclado)\n- Identifica oportunidades de optimización de rendimiento\n- Revisa el uso correcto de componentes de Next.js (Image, Link, etc.)\n- Valida la implementación de SEO y meta tags\n\n## 4. Mejores Prácticas de React y Next.js\n- Revisa el uso de hooks (useState, useEffect, hooks personalizados)\n- Valida la gestión de estado con Zustand\n- Confirma el manejo correcto de formularios con React Hook Form y Zod\n- Revisa la implementación de Server Components vs Client Components\n\n## 5. Contexto de E-commerce de Panadería\n- Verifica la implementación correcta de tipos de productos (galletas, pasteles, panes, temporada)\n- Revisa la lógica del carrito de compras y favoritos\n- Valida el manejo de información de alérgenos e ingredientes\n- Confirma la integración correcta de email (EmailJS, SendGrid, Resend)\n- Revisa la persistencia en Local Storage\n\nProporciona sugerencias específicas y prácticas para mejorar el código, manteniendo el contexto del negocio de panadería artesanal."
+  }
+}

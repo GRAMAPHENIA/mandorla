@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validador de Componentes UI",
+  "description": "Valida componentes UI en src/components/ui/ para asegurar uso correcto de variantes de Tailwind, colores de marca Mandorla, props de accesibilidad y optimizaciones de rendimiento",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/components/ui/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza el componente UI modificado y verifica:\n\n1. **Variantes de Tailwind**: Confirma que el componente use las variantes de clase definidas en tailwind.config.ts y siga las convenciones de class-variance-authority si aplica.\n\n2. **Colores de Marca Mandorla**: Verifica que se usen los colores oficiales:\n   - mandorla-cream\n   - mandorla-warm-brown  \n   - mandorla-dark-brown\n   - off-white\n   Sugiere reemplazos si se usan colores genéricos.\n\n3. **Accesibilidad**: Valida que el componente incluya:\n   - Props aria-* apropiadas\n   - Roles semánticos correctos\n   - Soporte para navegación por teclado\n   - Contraste de colores adecuado\n   - Labels descriptivos\n\n4. **Optimización de Rendimiento**: Revisa y sugiere:\n   - Uso de React.memo si es necesario\n   - Optimización de re-renders\n   - Lazy loading para componentes pesados\n   - Memoización de cálculos costosos\n\nProporciona feedback específico en español con ejemplos de código para cualquier mejora necesaria. Si todo está correcto, confirma que el componente cumple con los estándares de Mandorla."
+  }
+}

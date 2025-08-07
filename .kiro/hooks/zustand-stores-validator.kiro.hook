@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validador de Stores Zustand",
+  "description": "Valida que los stores de Zustand sigan las convenciones del proyecto, implementen persistencia en localStorage correctamente, tengan tipos TypeScript apropiados y sugiere mejoras de rendimiento",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/stores/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza los archivos modificados en src/stores/ y verifica lo siguiente:\n\n1. **Convenciones del Proyecto:**\n   - El store sigue la estructura estándar de Zustand\n   - Usa nomenclatura consistente (camelCase para propiedades, PascalCase para tipos)\n   - Implementa el patrón de estado inmutable correctamente\n   - Las acciones están bien organizadas y documentadas\n\n2. **Persistencia en localStorage:**\n   - Verifica si el store necesita persistencia y si está implementada correctamente\n   - Revisa que use el middleware de persist de Zustand apropiadamente\n   - Confirma que las claves de localStorage sean descriptivas y únicas\n   - Valida que la serialización/deserialización funcione correctamente\n\n3. **Tipos TypeScript:**\n   - Todos los tipos de estado están definidos apropiadamente\n   - Las interfaces están bien estructuradas y exportadas si es necesario\n   - Los tipos de las acciones son correctos y type-safe\n   - No hay tipos 'any' innecesarios\n\n4. **Optimización de Rendimiento:**\n   - Sugiere el uso de selectores específicos para evitar re-renders innecesarios\n   - Recomienda dividir stores grandes en stores más pequeños si es apropiado\n   - Verifica que las actualizaciones de estado sean eficientes\n   - Sugiere el uso de immer si hay actualizaciones complejas de estado anidado\n\nProporciona feedback específico en español sobre cada punto, incluyendo ejemplos de código mejorado cuando sea necesario. Si encuentras problemas, explica cómo solucionarlos siguiendo las mejores prácticas de Zustand y TypeScript."
+  }
+}

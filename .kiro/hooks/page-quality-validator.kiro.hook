@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validador de Calidad de Páginas",
+  "description": "Valida que las páginas de Next.js tengan metadata SEO apropiada, usen layouts correctos, componentes UI consistentes, sean responsivas y accesibles, y sugiere mejoras de rendimiento",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/app/*/page.tsx"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza el archivo de página Next.js que se ha guardado y verifica lo siguiente:\n\n1. **Metadata SEO**: \n   - Verifica que la página tenga metadata apropiada (title, description, keywords)\n   - Asegúrate de que use la función generateMetadata() o el objeto metadata\n   - Revisa que los títulos sean descriptivos y únicos\n   - Confirma que las descripciones sean informativas y de longitud apropiada\n\n2. **Layout y Componentes UI**:\n   - Verifica que use el layout correcto de la aplicación\n   - Asegúrate de que use componentes UI consistentes de shadcn/ui\n   - Revisa que siga las convenciones de diseño de Mandorla (colores de marca, tipografía)\n   - Confirma el uso correcto de componentes de layout\n\n3. **Responsividad y Accesibilidad**:\n   - Verifica que use clases de Tailwind CSS responsivas (sm:, md:, lg:, xl:)\n   - Asegúrate de que tenga atributos de accesibilidad apropiados (aria-labels, alt text, roles)\n   - Revisa la estructura semántica HTML (headings, landmarks)\n   - Confirma que sea navegable por teclado\n\n4. **Rendimiento**:\n   - Sugiere lazy loading para imágenes si es apropiado\n   - Recomienda dynamic imports para componentes pesados\n   - Verifica el uso correcto de next/image para optimización\n   - Sugiere mejoras de carga si detectas oportunidades\n\nProporciona un análisis detallado en español con recomendaciones específicas para mejorar la calidad de la página."
+  }
+}

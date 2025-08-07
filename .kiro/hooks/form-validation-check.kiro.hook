@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Validación de Formularios",
+  "description": "Verifica que los formularios en checkout y contacto usen React Hook Form con validación Zod, campos requeridos apropiados, mensajes en español y accesibilidad",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/components/checkout/**/*",
+      "src/components/contact/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza los archivos modificados en src/components/checkout/ o src/components/contact/ y verifica:\n\n1. **React Hook Form con Zod**: Confirma que los formularios usen useForm de react-hook-form con zodResolver y esquemas de validación Zod apropiados.\n\n2. **Validación de campos requeridos**: Asegúrate de que todos los campos obligatorios tengan validación Zod apropiada (ej: .min(1, \"mensaje\"), .email(\"mensaje\"), etc.).\n\n3. **Mensajes en español**: Verifica que todos los mensajes de error y validación estén en español y sean claros para el usuario.\n\n4. **Accesibilidad**: Revisa que:\n   - Todos los inputs tengan labels apropiados\n   - Se usen aria-labels cuando sea necesario\n   - Los mensajes de error estén asociados correctamente con los campos\n   - Se use aria-invalid para campos con errores\n\nProporciona sugerencias específicas de mejora si encuentras problemas en cualquiera de estas áreas, incluyendo ejemplos de código cuando sea apropiado."
+  }
+}

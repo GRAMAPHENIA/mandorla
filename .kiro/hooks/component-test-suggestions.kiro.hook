@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Sugerencias de Pruebas para Componentes",
+  "description": "Se activa al guardar componentes en src/components/ para sugerir casos de prueba, verificar testabilidad, recomendar pruebas de accesibilidad y sugerir pruebas de integración con stores",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/components/**/*.tsx",
+      "src/components/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza el componente que se acaba de guardar y proporciona en español:\n\n1. **Casos de Prueba Sugeridos:**\n   - Pruebas unitarias para props y comportamiento\n   - Casos edge y estados de error\n   - Pruebas de renderizado condicional\n\n2. **Verificación de Testabilidad:**\n   - Revisa si las props están bien definidas con TypeScript\n   - Verifica si la lógica está separada de la presentación\n   - Identifica dependencias que necesitan mocking\n\n3. **Pruebas de Accesibilidad:**\n   - Roles ARIA apropiados\n   - Navegación por teclado\n   - Contraste de colores y legibilidad\n   - Etiquetas y descripciones para lectores de pantalla\n\n4. **Pruebas de Integración con Stores:**\n   - Si el componente usa stores de Zustand, sugiere pruebas de integración\n   - Verifica interacciones con estado global (carrito, favoritos)\n   - Pruebas de efectos secundarios y actualizaciones de estado\n\nProporciona ejemplos de código de prueba usando Jest y React Testing Library cuando sea apropiado."
+  }
+}
