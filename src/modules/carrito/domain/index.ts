@@ -1,18 +1,22 @@
 // Entidades
-export { CartEntity } from './entities/CartEntity'
+export { CartEntity } from './entities/cart-entity'
 
 // Value Objects
-export { CartId, CustomerId, CartItem } from './value-objects'
+export { CartId } from './value-objects/cart-id'
+export { CartItem } from './value-objects/cart-item'
+export { Money } from './value-objects/money'
 
 // Errores
 export {
-  CartDomainError,
-  CartNotFoundError,
+  DomainError,
   InvalidQuantityError,
-  ItemNotInCartError,
+  CartNotFoundError,
   EmptyCartError,
-  CartLimitExceededError
-} from './errors/CartErrors'
-
-// Repositorios
-export type { CartRepository } from './repositories/CartRepository'
+  MaxQuantityExceededError,
+  InvalidPriceError,
+  InvalidProductIdError,
+  isDomainError,
+  isValidationError,
+  isBusinessError,
+  isNotFoundError
+} from './errors/cart-errors'

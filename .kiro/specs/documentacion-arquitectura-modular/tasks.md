@@ -30,7 +30,6 @@
 
 - [x] 2. Refactorizar módulo de productos siguiendo principios SOLID
 
-
   - Implementar entidades de dominio para productos con validaciones
   - Crear servicios de aplicación con casos de uso específicos
   - Implementar repositorios e interfaces siguiendo inversión de dependencias
@@ -69,28 +68,32 @@
   - Crear documentación automática para componentes refactorizados
   - _Requisitos: 3.1, 4.1, 1.3_
 
-- [ ] 3. Refactorizar módulo de carrito con arquitectura modular
+- [x] 3. Refactorizar módulo de carrito con arquitectura modular
+
   - Implementar entidad CartEntity con métodos de dominio
   - Crear servicios de carrito desacoplados del estado global
   - Implementar persistencia local siguiendo patrón repository
   - Refactorizar store de Zustand para usar servicios de dominio
   - _Requisitos: 2.1, 2.2, 3.1, 3.2_
 
-- [ ] 3.1 Implementar dominio de carrito
+- [x] 3.1 Implementar dominio de carrito
+
   - Crear entidad CartEntity con métodos addItem, removeItem, calculateTotal
   - Implementar value objects (CartId, CartItem) con validaciones
   - Crear errores específicos (InvalidQuantityError, CartNotFoundError)
   - Escribir tests unitarios para lógica de dominio del carrito
   - _Requisitos: 3.1, 4.2_
 
-- [ ] 3.2 Crear servicios de aplicación para carrito
+- [x] 3.2 Crear servicios de aplicación para carrito
+
   - Implementar CartService con casos de uso (addToCart, removeFromCart, clearCart)
   - Crear interfaces para persistencia de carrito
   - Implementar manejo de errores y validaciones en servicios
   - Escribir tests unitarios para servicios de carrito
   - _Requisitos: 3.2, 3.3_
 
-- [ ] 3.3 Refactorizar store de Zustand
+- [x] 3.3 Refactorizar store de Zustand
+
   - Adaptar cart-store.ts para usar servicios de dominio
   - Implementar patrón facade para simplificar interacción con UI
   - Separar estado de presentación de lógica de negocio

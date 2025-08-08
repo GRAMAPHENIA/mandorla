@@ -1,2 +1,2 @@
-// Hooks
-export { useCart } from './hooks/useCart'
+// Facades
+export { CartFacade } from './facades/cart.facade'
