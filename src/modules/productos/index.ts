@@ -1,13 +1,11 @@
-// Exportaciones principales del módulo de productos
-
-// Domain
+// Dominio
 export * from './domain'
 
-// Application
+// Aplicación
 export * from './application'
 
-// Infrastructure
+// Infraestructura
 export * from './infrastructure'
 
-// Presentation
+// Presentación
 export * from './presentation'

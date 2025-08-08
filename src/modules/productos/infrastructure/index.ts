@@ -1,6 +1,9 @@
 // Repositorios
-export { InMemoryProductRepository } from './repositories/InMemoryProductRepository'
+export { ProductRepository } from './repositories/ProductRepository'
+
+// Mappers
+export { ProductMapper } from './mappers/ProductMapper'
 
 // Adaptadores
-export { ProductDataAdapter } from './adapters/ProductDataAdapter'
-export type { ProductDTO } from './adapters/ProductDataAdapter'
+export { LocalStorageAdapter } from './adapters/LocalStorageAdapter'
+export { MockDataAdapter } from './adapters/MockDataAdapter'

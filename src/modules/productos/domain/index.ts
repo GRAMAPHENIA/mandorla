@@ -2,16 +2,18 @@
 export { ProductEntity } from './entities/ProductEntity'
 
 // Value Objects
-export { ProductId, Money, ProductCategory, ProductAvailability } from './value-objects'
+export { ProductId } from './value-objects/ProductId'
+export { Money } from './value-objects/Money'
+export { ProductCategory, type ProductCategoryType } from './value-objects/ProductCategory'
 
-// Errores
+// Errores de dominio
 export {
   ProductDomainError,
   ProductNotFoundError,
   InvalidPriceError,
-  ProductUnavailableError,
-  InvalidCategoryError
+  InvalidProductNameError,
+  InvalidProductDescriptionError,
+  ProductOutOfStockError,
+  InvalidIngredientError,
+  InvalidAllergenError
 } from './errors/ProductErrors'
-
-// Repositorios
-export type { ProductRepository } from './repositories/ProductRepository'
