@@ -10,7 +10,11 @@
     "test": "pnpm exec jest",
     "test:watch": "pnpm exec jest --watch",
     "test:coverage": "pnpm exec jest --coverage",
-    "test:ci": "pnpm exec jest --ci --coverage --watchAll=false"
+    "test:ci": "pnpm exec jest --ci --coverage --watchAll=false",
+    "analyze": "node scripts/analyze-bundle.js",
+    "analyze:tree-shaking": "node scripts/analyze-tree-shaking.js",
+    "analyze:full": "node scripts/bundle-report.js",
+    "build:analyze": "npm run build && npm run analyze:full"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

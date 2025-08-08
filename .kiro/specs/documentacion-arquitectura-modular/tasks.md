@@ -100,28 +100,30 @@
   - Crear tests de integración para store refactorizado
   - _Requisitos: 2.3, 3.4_
 
-- [ ] 4. Implementar sistema de code splitting estratégico
+- [x] 4. Implementar sistema de code splitting estratégico
+
   - Configurar code splitting por módulos de dominio
   - Implementar lazy loading para componentes pesados
   - Optimizar bundles sin crear sobre-ingeniería
   - Crear sistema de preloading inteligente
   - _Requisitos: 5.1, 5.2, 5.3, 5.4_
 
-- [ ] 4.1 Configurar code splitting por módulos
+- [x] 4.1 Configurar code splitting por módulos
+
   - Implementar dynamic imports para módulos de productos, carrito, pedidos
   - Crear componentes wrapper con React.lazy() y Suspense
   - Configurar Next.js para optimización automática de chunks
   - Escribir tests para verificar correcta división de código
   - _Requisitos: 5.2, 5.3_
 
-- [ ] 4.2 Implementar lazy loading para componentes pesados
+- [x] 4.2 Implementar lazy loading para componentes pesados
   - Identificar componentes pesados (formularios complejos, visualizaciones)
   - Crear sistema de lazy loading con fallbacks de carga
   - Implementar preloading condicional basado en interacciones del usuario
   - Optimizar imágenes y recursos estáticos con Next.js Image
   - _Requisitos: 5.1, 5.4_
 
-- [ ] 4.3 Optimizar configuración de bundles
+- [x] 4.3 Optimizar configuración de bundles
   - Configurar splitChunks en Next.js para separar vendor, common y modules
   - Implementar tree shaking para eliminar código no utilizado
   - Optimizar importaciones de librerías (Radix UI, Lucide React)

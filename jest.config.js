@@ -47,13 +47,27 @@ const customJestConfig = {
   // Formatos de reporte de cobertura
   coverageReporters: ['text', 'lcov', 'html'],
   
-  // Umbrales de cobertura
+  // Umbrales de cobertura específicos para módulos
   coverageThreshold: {
     global: {
       branches: 70,
       functions: 70,
       lines: 70,
       statements: 70,
+    },
+    // Umbrales más estrictos para módulos de dominio
+    'src/modules/**/domain/**': {
+      branches: 85,
+      functions: 85,
+      lines: 85,
+      statements: 85,
+    },
+    // Umbrales para servicios de aplicación
+    'src/modules/**/application/**': {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
   

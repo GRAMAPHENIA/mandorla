@@ -1,6 +1,5 @@
-import { ProductGrid } from "../../components/products/product-grid";
-import { ProductFilters } from "../../components/products/product-filters";
-import { Suspense } from "react";
+import { LazyProductGrid } from "../../components/lazy/LazyProductGrid";
+import { LazyProductFilters } from "../../components/lazy/LazyProductFilters";
 import { SectionTitle } from "../../components/ui/section-title";
 
 export const metadata = {
@@ -24,21 +23,11 @@ export default function ProductsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <aside className="lg:col-span-1">
-          <ProductFilters />
+          <LazyProductFilters />
         </aside>
 
         <div className="lg:col-span-3">
-          <Suspense
-            fallback={
-              <div className="flex justify-center items-center h-64">
-                <div className="animate-pulse text-muted-foreground">
-                  Cargando productos...
-                </div>
-              </div>
-            }
-          >
-            <ProductGrid />
-          </Suspense>
+          <LazyProductGrid />
         </div>
       </div>
     </div>

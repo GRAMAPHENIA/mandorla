@@ -1,5 +1,5 @@
-import { CartItems } from "../../components/cart/cart-items"
-import { CartSummary } from "../../components/cart/cart-summary"
+import { LazyCartItems } from "../../components/lazy/LazyCartItems"
+import { LazyCartSummary } from "../../components/lazy/LazyCartSummary"
 
 export const metadata = {
   title: "Carrito de Compras - Panadería Mandorla",
@@ -13,11 +13,11 @@ export default function CartPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
-          <CartItems />
+          <LazyCartItems />
         </div>
 
         <div className="lg:col-span-1">
-          <CartSummary />
+          <LazyCartSummary />
         </div>
       </div>
     </div>
