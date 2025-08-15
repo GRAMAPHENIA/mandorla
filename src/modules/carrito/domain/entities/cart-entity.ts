@@ -49,18 +49,6 @@ export class CartEntity {
     )
 
     return new CartEntity(cartId, cartItems, data.createdAt, data.updatedAt)
-  }CartId.create(data.id)
-    const cartItems = data.items.map(item => 
-      CartItem.create({
-        productId: item.productId,
-        name: item.name,
-        price: Money.create(item.price),
-        quantity: item.quantity,
-        image: item.image
-      })
-    )
-
-    return new CartEntity(cartId, cartItems, data.createdAt, data.updatedAt)
   }
 
   /**
