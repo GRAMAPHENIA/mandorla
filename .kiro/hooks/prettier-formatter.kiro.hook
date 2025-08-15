@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Formateador Prettier Automático",
+  "description": "Hook que aplica formateo Prettier consistente al guardar archivos, manteniendo un estilo de código uniforme en todo el proyecto Mandorla",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.{ts,tsx,js,jsx,json,md}",
+      "types/**/*.ts",
+      "lib/**/*.ts",
+      "*.{json,md,yml,yaml}"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Aplica formateo Prettier automático al archivo modificado siguiendo la configuración estándar del proyecto:\n\n## Configuración Prettier para Mandorla\n\n### 1. Configuración Base\n```json\n{\n  \"semi\": true,\n  \"trailingComma\": \"es5\",\n  \"singleQuote\": true,\n  \"printWidth\": 100,\n  \"tabWidth\": 2,\n  \"useTabs\": false,\n  \"bracketSpacing\": true,\n  \"bracketSameLine\": false,\n  \"arrowParens\": \"avoid\",\n  \"endOfLine\": \"lf\"\n}\n```\n\n### 2. Reglas Específicas por Tipo de Archivo\n\n**TypeScript/JavaScript (.ts, .tsx, .js, .jsx):**\n- Punto y coma: Siempre incluir\n- Comillas: Simples para strings, dobles para JSX props\n- Indentación: 2 espacios\n- Longitud máxima: 100 caracteres\n- Trailing commas: En objetos y arrays multilínea\n\n**JSON (.json):**\n- Indentación: 2 espacios\n- Sin trailing commas\n- Comillas dobles obligatorias\n\n**Markdown (.md):**\n- Longitud de línea: 100 caracteres\n- Preservar saltos de línea en listas\n\n### 3. Formateo de Estructuras Específicas\n\n**Objetos y Arrays:**\n```typescript\n// ✅ Correcto\nconst producto = {\n  id: 1,\n  nombre: 'Pan Integral',\n  precio: 2500,\n  disponible: true,\n};\n\n// ✅ Array multilínea\nconst categorias = [\n  'galletas',\n  'pasteles',\n  'panes',\n  'temporada',\n];\n```\n\n**Funciones y Componentes:**\n```typescript\n// ✅ Función con parámetros múltiples\nconst calcularPrecioTotal = (\n  productos: Producto[],\n  descuento: number,\n  impuestos: number\n): number => {\n  // lógica aquí\n};\n\n// ✅ Componente React\nconst ListaProductos: React.FC<ListaProductosProps> = ({\n  productos,\n  onSeleccionar,\n  mostrarPrecios = true,\n}) => {\n  return (\n    <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\">\n      {/* contenido */}\n    </div>\n  );\n};\n```\n\n**Imports:**\n```typescript\n// ✅ Organización de imports\nimport React, { useState, useEffect } from 'react';\nimport { NextPage } from 'next';\n\nimport { Button } from '@/components/ui/button';\nimport { ProductoCard } from '@/components/productos/ProductoCard';\n\nimport { useProductos } from '@/hooks/useProductos';\nimport { formatearPrecio } from '@/lib/utils';\n\nimport type { Producto } from '@/types/product';\n```\n\n### 4. Casos Especiales\n\n**JSX/TSX:**\n- Props en líneas separadas si exceden 100 caracteres\n- Cierre de tags en línea separada para elementos multilínea\n- Espacios en llaves de expresiones: `{ valor }`\n\n**Tailwind CSS:**\n- Mantener clases en una línea si es posible\n- Separar en múltiples líneas si excede 100 caracteres\n\n### 5. Validaciones Adicionales\n\n**Consistencia:**\n- Verificar que todo el archivo siga el mismo estilo\n- Detectar inconsistencias en indentación\n- Validar uso correcto de comillas\n\n**Calidad:**\n- Eliminar espacios en blanco innecesarios\n- Normalizar saltos de línea\n- Verificar encoding UTF-8\n\n**Instrucciones de Ejecución:**\n1. Aplica el formateo Prettier automáticamente\n2. Respeta la configuración definida arriba\n3. Mantén la funcionalidad del código intacta\n4. Reporta solo cambios significativos\n5. Si hay conflictos, prioriza legibilidad\n\n**Formato de Respuesta:**\n- ✅ **Formateo completado**: Archivo formateado correctamente\n- 🔧 **Cambios aplicados**: [lista breve de cambios de formato]\n- ⚠️ **Advertencias**: [si hay problemas de formato complejos]\n- 📏 **Métricas**: [líneas afectadas, caracteres por línea promedio]"
+  }
+}

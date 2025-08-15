@@ -137,7 +137,10 @@
   - Crear hooks para validación de tipos TypeScript
   - _Requisitos: 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 5.1 Implementar hooks de formateo y linting
+- [x] 5.1 Implementar hooks de formateo y linting
+
+
+
   - Crear hook auto-format-on-save para archivos TypeScript/React
   - Configurar integración con Prettier y ESLint
   - Implementar hook para validación de convenciones de nomenclatura

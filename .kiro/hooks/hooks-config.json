@@ -1,0 +1,56 @@
+{
+  "formateo_automatico": {
+    "descripcion": "Configuración para hooks de formateo automático",
+    "hooks_activos": [
+      "auto-format-on-save.kiro.hook",
+      "prettier-formatter.kiro.hook",
+      "eslint-integration.kiro.hook",
+      "naming-conventions-validator.kiro.hook"
+    ],
+    "patrones_archivos": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "types/**/*.ts",
+      "lib/**/*.ts",
+      "scripts/**/*.{js,ts}"
+    ],
+    "configuracion_prettier": {
+      "semi": true,
+      "trailingComma": "es5",
+      "singleQuote": true,
+      "printWidth": 100,
+      "tabWidth": 2,
+      "useTabs": false,
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "arrowParens": "avoid",
+      "endOfLine": "lf"
+    },
+    "reglas_eslint": {
+      "typescript": true,
+      "react": true,
+      "next": true,
+      "imports_organizados": true,
+      "variables_no_usadas": true
+    },
+    "convenciones_nomenclatura": {
+      "componentes": "PascalCase en español",
+      "variables": "camelCase en español",
+      "funciones": "camelCase con verbos en español",
+      "tipos": "PascalCase con sufijo descriptivo",
+      "archivos": "kebab-case para utilidades",
+      "carpetas": "kebab-case para módulos"
+    }
+  },
+  "orden_ejecucion": [
+    "prettier-formatter",
+    "eslint-integration", 
+    "naming-conventions-validator",
+    "auto-format-on-save"
+  ],
+  "configuracion_global": {
+    "ejecutar_en_paralelo": false,
+    "detener_en_error": false,
+    "mostrar_progreso": true,
+    "backup_antes_formateo": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Formateo Automático al Guardar",
+  "description": "Hook que se activa al guardar archivos TypeScript/React para aplicar formateo automático con Prettier y linting con ESLint, manteniendo la consistencia del código en el proyecto Mandorla",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "types/**/*.ts",
+      "lib/**/*.ts",
+      "scripts/**/*.{js,ts}"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analiza y formatea automáticamente el archivo modificado siguiendo estas reglas:\n\n## 1. Formateo de Código\n- **Indentación**: 2 espacios para TypeScript/React\n- **Comillas**: Usar comillas simples para strings\n- **Punto y coma**: Siempre incluir al final de statements\n- **Longitud de línea**: Máximo 100 caracteres\n- **Trailing commas**: Incluir en objetos y arrays multilínea\n\n## 2. Linting y Calidad\n- **Imports**: Organizar imports por grupos (React, librerías, internos)\n- **Variables no usadas**: Eliminar imports y variables no utilizadas\n- **Tipos TypeScript**: Verificar que todos los tipos estén correctamente definidos\n- **Naming conventions**: Verificar nomenclatura en español para variables de negocio\n\n## 3. Convenciones Específicas del Proyecto\n- **Componentes**: PascalCase con nombres descriptivos en español\n- **Hooks**: Prefijo 'use' seguido de nombre descriptivo\n- **Tipos**: Sufijo 'Type' o 'Interface' según corresponda\n- **Constantes**: UPPER_SNAKE_CASE para constantes globales\n\n## 4. Validaciones Específicas\n- **Arquitectura modular**: Verificar que los imports respeten la separación de capas\n- **Principios SOLID**: Detectar violaciones evidentes (funciones muy largas, múltiples responsabilidades)\n- **Clean code**: Sugerir mejoras en nombres de variables y funciones\n\n## 5. Comentarios y Documentación\n- **JSDoc**: Agregar documentación para funciones públicas complejas\n- **Comentarios**: En español para lógica de negocio compleja\n- **TODO/FIXME**: Formatear correctamente con contexto\n\n**Instrucciones de Ejecución:**\n1. Aplica el formateo automáticamente sin preguntar\n2. Reporta solo los cambios significativos realizados\n3. Si encuentras errores de TypeScript, repórtalos con sugerencias de solución\n4. Mantén la funcionalidad existente intacta\n5. Si hay conflictos de formateo, prioriza la legibilidad\n\n**Formato de Respuesta:**\n- ✅ Formateo aplicado correctamente\n- 🔧 Cambios realizados: [lista breve]\n- ⚠️ Advertencias: [si las hay]\n- ❌ Errores encontrados: [si los hay]"
+  }
+}

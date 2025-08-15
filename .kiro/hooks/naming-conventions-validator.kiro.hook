@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Validador de Convenciones de Nomenclatura",
+  "description": "Hook que valida las convenciones de nomenclatura en español para componentes, variables, funciones y archivos del proyecto Mandorla",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.{ts,tsx}",
+      "types/**/*.ts",
+      "lib/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Valida las convenciones de nomenclatura del archivo modificado según los estándares del proyecto Mandorla:\n\n## 1. Convenciones de Componentes React\n- **Nombres de componentes**: PascalCase con nombres descriptivos en español\n  - ✅ Correcto: `ListaProductos`, `FormularioCliente`, `BotonAgregarCarrito`\n  - ❌ Incorrecto: `productList`, `client_form`, `addToCartBtn`\n- **Archivos de componentes**: Mismo nombre que el componente + extensión\n  - ✅ Correcto: `ListaProductos.tsx`, `FormularioCliente.tsx`\n\n## 2. Convenciones de Variables y Funciones\n- **Variables de negocio**: camelCase con nombres en español\n  - ✅ Correcto: `precioTotal`, `cantidadProductos`, `datosCliente`\n  - ❌ Incorrecto: `totalPrice`, `product_count`, `customerData`\n- **Funciones**: camelCase con verbos descriptivos en español\n  - ✅ Correcto: `calcularPrecioTotal()`, `agregarAlCarrito()`, `validarFormulario()`\n  - ❌ Incorrecto: `calculateTotal()`, `addToCart()`, `validateForm()`\n\n## 3. Convenciones de Tipos TypeScript\n- **Interfaces**: PascalCase con sufijo descriptivo\n  - ✅ Correcto: `ProductoInterface`, `ClienteType`, `PedidoEntity`\n- **Enums**: PascalCase con valores en UPPER_CASE\n  - ✅ Correcto: `EstadoPedido { PENDIENTE, PROCESANDO, COMPLETADO }`\n\n## 4. Convenciones de Archivos y Carpetas\n- **Archivos**: kebab-case para archivos de utilidades\n  - ✅ Correcto: `validaciones-formulario.ts`, `utilidades-precio.ts`\n- **Carpetas de módulos**: kebab-case\n  - ✅ Correcto: `modulos/productos/`, `modulos/carrito/`\n\n## 5. Excepciones Permitidas\n- **APIs externas**: Mantener nombres originales (ej: `useState`, `useEffect`)\n- **Librerías**: Mantener convenciones de la librería\n- **Constantes globales**: UPPER_SNAKE_CASE (ej: `API_BASE_URL`)\n\n## 6. Validaciones Específicas\n- **Consistencia**: Verificar que nombres similares sigan el mismo patrón\n- **Claridad**: Los nombres deben ser autodescriptivos\n- **Contexto**: Los nombres deben reflejar el dominio de negocio (panadería/e-commerce)\n\n**Instrucciones:**\n1. Analiza todos los nombres en el archivo (variables, funciones, componentes, tipos)\n2. Identifica violaciones a las convenciones\n3. Proporciona sugerencias específicas de corrección\n4. Prioriza la claridad y consistencia\n5. Respeta el contexto del negocio (Mandorla - panadería)\n\n**Formato de Respuesta:**\n- ✅ Convenciones correctas: [lista de elementos que siguen las reglas]\n- ⚠️ Sugerencias de mejora: [nombres que podrían ser más descriptivos]\n- ❌ Violaciones encontradas: [nombres que no siguen las convenciones]\n- 🔧 Correcciones sugeridas: [propuestas específicas de cambio]"
+  }
+}

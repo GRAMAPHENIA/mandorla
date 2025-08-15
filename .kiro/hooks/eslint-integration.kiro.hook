@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Integración ESLint Automática",
+  "description": "Hook que ejecuta ESLint automáticamente al guardar archivos para detectar y corregir problemas de código, manteniendo la calidad del proyecto Mandorla",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "types/**/*.ts",
+      "lib/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Ejecuta una validación ESLint automática en el archivo modificado y aplica las correcciones necesarias:\n\n## 1. Validaciones ESLint Principales\n- **Sintaxis**: Verificar errores de sintaxis TypeScript/JavaScript\n- **Imports**: Validar imports no utilizados y organización\n- **Variables**: Detectar variables declaradas pero no usadas\n- **Tipos**: Verificar consistencia de tipos TypeScript\n- **React Hooks**: Validar reglas de hooks (dependencies, orden)\n\n## 2. Reglas Específicas del Proyecto\n- **Next.js**: Validar uso correcto de componentes Next.js\n- **React**: Verificar patrones de React (keys, props, state)\n- **TypeScript**: Asegurar tipado estricto\n- **Imports**: Verificar rutas relativas vs absolutas\n\n## 3. Correcciones Automáticas\n**Aplicar automáticamente:**\n- Eliminar imports no utilizados\n- Agregar punto y coma faltante\n- Corregir indentación inconsistente\n- Organizar imports por grupos\n- Agregar tipos faltantes obvios\n\n**Reportar para revisión manual:**\n- Errores de lógica de negocio\n- Problemas de rendimiento potenciales\n- Violaciones de principios SOLID\n- Dependencias de hooks incorrectas\n\n## 4. Validaciones Específicas de Arquitectura\n- **Separación de capas**: Verificar que imports respeten arquitectura hexagonal\n- **Módulos**: Validar que no haya dependencias circulares\n- **Componentes**: Verificar que componentes UI no importen lógica de negocio\n\n## 5. Reglas de Calidad de Código\n- **Complejidad ciclomática**: Detectar funciones muy complejas\n- **Longitud de funciones**: Identificar funciones muy largas\n- **Duplicación**: Detectar código duplicado obvio\n- **Nomenclatura**: Verificar nombres descriptivos\n\n## 6. Integración con Herramientas del Proyecto\n- **Jest**: Validar imports de testing utilities\n- **Zustand**: Verificar patrones correctos de stores\n- **React Hook Form**: Validar uso correcto de formularios\n- **Zod**: Verificar esquemas de validación\n\n**Comandos a Simular:**\n```bash\n# Ejecutar ESLint con auto-fix\nnpx eslint [archivo] --fix\n\n# Verificar tipos TypeScript\nnpx tsc --noEmit\n```\n\n**Instrucciones de Ejecución:**\n1. Analiza el archivo como si ejecutaras ESLint\n2. Aplica correcciones automáticas seguras\n3. Reporta errores que requieren atención manual\n4. Proporciona sugerencias específicas de mejora\n5. Mantén la funcionalidad existente\n\n**Formato de Respuesta:**\n- 🔧 **Correcciones aplicadas**: [lista de fixes automáticos]\n- ⚠️ **Advertencias**: [problemas menores detectados]\n- ❌ **Errores críticos**: [problemas que requieren atención]\n- 💡 **Sugerencias**: [mejoras recomendadas]\n- ✅ **Estado**: [archivo limpio/requiere revisión]"
+  }
+}
