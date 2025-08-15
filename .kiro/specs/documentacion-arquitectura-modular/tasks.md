@@ -147,7 +147,10 @@
   - Crear configuración de hooks en .kiro/hooks/
   - _Requisitos: 6.1_
 
-- [ ] 5.2 Crear hooks de documentación automática
+
+- [x] 5.2 Crear hooks de documentación automática
+
+
   - Implementar hook update-component-docs que se ejecute al guardar componentes
   - Crear hook para regeneración de documentación de APIs
   - Configurar hook para actualización de diagramas de arquitectura

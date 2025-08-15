@@ -16,11 +16,11 @@ export function HeroSection() {
           {/* Texto y CTA */}
           <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-12">
-              <span className="block text-7xl mb-3 mt-6">
+              <span className="block text-7xl mt-6">
                 <span className="mandorla-text-gradient">Mandorla</span>
               </span>
               <span className="block text-3xl md:text-4xl lg:text-5xl font-medium">
-                Bakery Cookies
+                Bakery
               </span>
             </h1>
 

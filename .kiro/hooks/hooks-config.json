@@ -41,16 +41,73 @@
       "carpetas": "kebab-case para módulos"
     }
   },
-  "orden_ejecucion": [
-    "prettier-formatter",
-    "eslint-integration", 
-    "naming-conventions-validator",
-    "auto-format-on-save"
-  ],
+  "documentacion_automatica": {
+    "descripcion": "Configuración para hooks de documentación automática",
+    "hooks_activos": [
+      "update-component-docs.kiro.hook",
+      "api-documentation-generator.kiro.hook",
+      "architecture-diagram-updater.kiro.hook",
+      "documentation-integrator.kiro.hook"
+    ],
+    "patrones_archivos": {
+      "componentes": [
+        "src/components/**/*.{tsx,ts}",
+        "src/modules/**/presentation/**/*.{tsx,ts}",
+        "src/shared/components/**/*.{tsx,ts}"
+      ],
+      "apis": [
+        "src/app/api/**/*.{ts,js}",
+        "src/pages/api/**/*.{ts,js}",
+        "src/modules/**/infrastructure/api/**/*.{ts,js}"
+      ],
+      "arquitectura": [
+        "src/modules/**/domain/**/*.ts",
+        "src/modules/**/application/**/*.ts",
+        "src/modules/**/infrastructure/**/*.ts",
+        "src/modules/**/presentation/**/*.tsx"
+      ],
+      "documentacion": [
+        "docs/**/*.md",
+        "src/**/*.docs.md",
+        "src/**/*.api.md"
+      ]
+    },
+    "estructura_documentacion": {
+      "directorio_base": "docs/",
+      "componentes": "docs/components/",
+      "apis": "docs/apis/",
+      "arquitectura": "docs/architecture/",
+      "guias": "docs/guides/",
+      "ejemplos": "docs/examples/"
+    },
+    "formatos_salida": {
+      "componentes": "*.docs.md",
+      "apis": "*.api.md",
+      "diagramas": "*.md con bloques mermaid",
+      "indices": "README.md en cada carpeta"
+    }
+  },
+  "orden_ejecucion": {
+    "formateo": [
+      "prettier-formatter",
+      "eslint-integration", 
+      "naming-conventions-validator",
+      "auto-format-on-save"
+    ],
+    "documentacion": [
+      "update-component-docs",
+      "api-documentation-generator",
+      "architecture-diagram-updater",
+      "documentation-integrator"
+    ]
+  },
   "configuracion_global": {
     "ejecutar_en_paralelo": false,
     "detener_en_error": false,
     "mostrar_progreso": true,
-    "backup_antes_formateo": false
+    "backup_antes_formateo": false,
+    "generar_indices_automaticos": true,
+    "validar_enlaces_cruzados": true,
+    "crear_metadatos": true
   }
 }
