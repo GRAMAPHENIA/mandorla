@@ -87,6 +87,87 @@
       "indices": "README.md en cada carpeta"
     }
   },
+  "testing_automatico": {
+    "descripcion": "Configuración para hooks de testing automático",
+    "hooks_activos": [
+      "run-related-tests.kiro.hook",
+      "coverage-validator.kiro.hook",
+      "integration-tests-trigger.kiro.hook",
+      "test-reports-generator.kiro.hook"
+    ],
+    "patrones_archivos": {
+      "codigo_fuente": [
+        "src/**/*.{ts,tsx}",
+        "types/**/*.ts",
+        "lib/**/*.ts"
+      ],
+      "tests": [
+        "src/**/*.test.{ts,tsx}",
+        "src/**/*.spec.{ts,tsx}",
+        "src/**/*.integration.test.{ts,tsx}"
+      ],
+      "configuracion": [
+        "jest.config.js",
+        "jest.setup.js"
+      ],
+      "criticos": [
+        "src/modules/**/application/**/*.ts",
+        "src/modules/**/infrastructure/**/*.ts",
+        "src/app/api/**/*.ts",
+        "src/stores/**/*.ts",
+        "src/components/checkout/**/*.tsx",
+        "src/components/cart/**/*.tsx",
+        "src/components/products/**/*.tsx"
+      ]
+    },
+    "umbrales_cobertura": {
+      "domain": {
+        "lines": 85,
+        "functions": 85,
+        "branches": 85,
+        "statements": 85
+      },
+      "application": {
+        "lines": 80,
+        "functions": 80,
+        "branches": 80,
+        "statements": 80
+      },
+      "infrastructure": {
+        "lines": 70,
+        "functions": 70,
+        "branches": 70,
+        "statements": 70
+      },
+      "components": {
+        "lines": 75,
+        "functions": 75,
+        "branches": 70,
+        "statements": 75
+      },
+      "hooks": {
+        "lines": 80,
+        "functions": 80,
+        "branches": 75,
+        "statements": 80
+      },
+      "utils": {
+        "lines": 70,
+        "functions": 75,
+        "branches": 65,
+        "statements": 70
+      }
+    },
+    "configuracion_jest": {
+      "testTimeout": 10000,
+      "maxWorkers": "50%",
+      "cache": true,
+      "verbose": true,
+      "collectCoverage": true,
+      "coverageReporters": ["text", "json", "html"],
+      "coverageDirectory": "coverage"
+    }
+  },
   "orden_ejecucion": {
     "formateo": [
       "prettier-formatter",
@@ -99,6 +180,12 @@
       "api-documentation-generator",
       "architecture-diagram-updater",
       "documentation-integrator"
+    ],
+    "testing": [
+      "run-related-tests",
+      "coverage-validator",
+      "integration-tests-trigger",
+      "test-reports-generator"
     ]
   },
   "configuracion_global": {

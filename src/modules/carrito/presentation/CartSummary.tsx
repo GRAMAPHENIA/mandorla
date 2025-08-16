@@ -7,13 +7,13 @@ import { useCartStore } from "../../../stores/cart-store";
 import { useRouter } from "next/navigation";
 
 export function CartSummary() {
-  const { items, getTotal, getItemCount } = useCartStore();
+  const { items, totalPrice, totalItems } = useCartStore();
   const router = useRouter();
 
-  const subtotal = getTotal();
+  const subtotal = totalPrice;
   const shipping = subtotal > 50 ? 0 : 5; // Envío gratis para pedidos > $50
   const total = subtotal + shipping;
-  const itemCount = getItemCount();
+  const itemCount = totalItems;
 
   const handleCheckout = () => {
     if (items.length > 0) {
@@ -32,7 +32,7 @@ export function CartSummary() {
             <span>Productos ({itemCount})</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
-          
+
           <div className="flex justify-between">
             <span>Envío</span>
             <span>
@@ -43,7 +43,7 @@ export function CartSummary() {
               )}
             </span>
           </div>
-          
+
           {subtotal > 0 && subtotal <= 50 && (
             <p className="text-sm text-muted-foreground">
               Agrega ${(50 - subtotal).toFixed(2)} más para envío gratis
@@ -58,8 +58,8 @@ export function CartSummary() {
           <span>${total.toFixed(2)}</span>
         </div>
 
-        <Button 
-          className="w-full" 
+        <Button
+          className="w-full"
           size="lg"
           onClick={handleCheckout}
           disabled={items.length === 0}

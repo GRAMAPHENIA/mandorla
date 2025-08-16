@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useCart } from "@/context/cart-context";
+import { useCartStore } from "../../stores/cart-store";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 
@@ -12,7 +12,8 @@ interface FormData {
 }
 
 export function CheckoutForm() {
-  const { cart, clearCart } = useCart();
+  const cart = useCartStore((state) => state.items);
+  const clearCart = useCartStore((state) => state.clearCart);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

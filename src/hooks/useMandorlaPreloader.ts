@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { usePreloader } from './usePreloader';
 
@@ -15,7 +15,7 @@ export function useProductPreloader() {
     {
       strategy: 'hover',
       respectNetworkConditions: true,
-      respectDeviceMemory: true
+      respectDeviceMemory: true,
     }
   );
 }
@@ -28,7 +28,7 @@ export function useCartPreloader() {
     {
       strategy: 'immediate',
       respectNetworkConditions: false, // Carrito es crítico
-      respectDeviceMemory: false
+      respectDeviceMemory: false,
     }
   );
 }
@@ -41,7 +41,7 @@ export function useCheckoutPreloader() {
     {
       strategy: 'intersection',
       intersectionOptions: { threshold: 0.3 },
-      respectNetworkConditions: true
+      respectNetworkConditions: true,
     }
   );
 }
@@ -54,20 +54,20 @@ export function useFavoritesPreloader() {
     {
       strategy: 'delay',
       delay: 3000, // Después de que el usuario explore un poco
-      respectNetworkConditions: true
+      respectNetworkConditions: true,
     }
   );
 }
 
-// Preloader para formulario de contacto - se activa al hacer scroll hacia abajo
+// Preloader para página de contacto - se activa al hacer scroll hacia abajo
 export function useContactPreloader() {
   return usePreloader(
     'contacto',
-    () => import('../components/contact/contact-form'),
+    () => import('../app/contact/page'),
     {
       strategy: 'intersection',
       intersectionOptions: { threshold: 0.1 },
-      respectNetworkConditions: true
+      respectNetworkConditions: true,
     }
   );
 }
