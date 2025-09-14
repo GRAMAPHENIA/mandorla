@@ -47,7 +47,10 @@
       "update-component-docs.kiro.hook",
       "api-documentation-generator.kiro.hook",
       "architecture-diagram-updater.kiro.hook",
-      "documentation-integrator.kiro.hook"
+      "documentation-integrator.kiro.hook",
+      "documentation-validator.kiro.hook",
+      "documentation-template-generator.kiro.hook",
+      "documentation-sync.kiro.hook"
     ],
     "patrones_archivos": {
       "componentes": [
@@ -85,6 +88,28 @@
       "apis": "*.api.md",
       "diagramas": "*.md con bloques mermaid",
       "indices": "README.md en cada carpeta"
+    },
+    "validacion_documentacion": {
+      "idioma_requerido": "español",
+      "terminologia_negocio": true,
+      "ejemplos_obligatorios": true,
+      "tabla_props_requerida": true,
+      "enlaces_cruzados": false,
+      "metadatos_requeridos": true
+    },
+    "plantillas_automaticas": {
+      "generar_al_crear": true,
+      "incluir_ejemplos_negocio": true,
+      "generar_diagramas_mermaid": true,
+      "incluir_notas_accesibilidad": true,
+      "contexto_panaderia": true
+    },
+    "sincronizacion": {
+      "actualizar_props": true,
+      "actualizar_tipos": true,
+      "preservar_contenido_personalizado": true,
+      "actualizar_enlaces_automaticamente": true,
+      "validar_despues_sincronizar": true
     }
   },
   "testing_automatico": {
@@ -176,9 +201,12 @@
       "auto-format-on-save"
     ],
     "documentacion": [
+      "documentation-template-generator",
       "update-component-docs",
       "api-documentation-generator",
       "architecture-diagram-updater",
+      "documentation-sync",
+      "documentation-validator",
       "documentation-integrator"
     ],
     "testing": [

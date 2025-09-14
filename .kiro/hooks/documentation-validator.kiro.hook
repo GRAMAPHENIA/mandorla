@@ -1,0 +1,122 @@
+{
+  "name": "documentation-validator",
+  "description": "Valida que la documentación siga los estándares de formato y contenido establecidos para Mandorla",
+  "version": "1.0.0",
+  "trigger": {
+    "type": "file-save",
+    "patterns": [
+      "**/*.md",
+      "**/*.mdx",
+      "src/components/**/*.tsx",
+      "src/modules/**/*.ts",
+      "src/app/api/**/*.ts"
+    ]
+  },
+  "conditions": [
+    {
+      "type": "file-exists",
+      "path": ".kiro/steering/documentacion-consistente.md"
+    }
+  ],
+  "actions": [
+    {
+      "type": "validate",
+      "name": "Validar formato de documentación",
+      "command": "node .kiro/scripts/validate-documentation.js",
+      "args": ["${filePath}"],
+      "options": {
+        "timeout": 30000,
+        "continueOnError": true
+      }
+    },
+    {
+      "type": "generate",
+      "name": "Generar documentación faltante",
+      "command": "node .kiro/scripts/generate-missing-docs.js",
+      "args": ["${filePath}"],
+      "conditions": [
+        {
+          "type": "file-extension",
+          "extensions": [".tsx", ".ts"]
+        }
+      ],
+      "options": {
+        "timeout": 45000,
+        "continueOnError": true
+      }
+    }
+  ],
+  "settings": {
+    "language": "es",
+    "businessContext": "panaderia-ecommerce",
+    "validationRules": {
+      "requireSpanish": true,
+      "requireBusinessTerminology": true,
+      "requireExamples": true,
+      "requirePropsTable": true,
+      "requireRelatedLinks": false,
+      "maxExampleAge": "30d"
+    },
+    "documentationTypes": {
+      "components": {
+        "requiredSections": [
+          "Descripción",
+          "Uso Básico",
+          "Props",
+          "Ejemplos de Uso"
+        ],
+        "optionalSections": [
+          "Variantes",
+          "Accesibilidad",
+          "Componentes Relacionados"
+        ]
+      },
+      "apis": {
+        "requiredSections": [
+          "Información General",
+          "Parámetros",
+          "Respuestas",
+          "Ejemplos de Uso"
+        ],
+        "optionalSections": [
+          "Validaciones",
+          "Testing"
+        ]
+      },
+      "modules": {
+        "requiredSections": [
+          "Descripción",
+          "Arquitectura del Módulo",
+          "Entidades de Dominio"
+        ],
+        "optionalSections": [
+          "Eventos de Dominio",
+          "Testing"
+        ]
+      }
+    }
+  },
+  "notifications": {
+    "onSuccess": {
+      "message": "✅ Documentación validada correctamente",
+      "level": "info"
+    },
+    "onWarning": {
+      "message": "⚠️ Documentación tiene advertencias - revisar formato",
+      "level": "warning"
+    },
+    "onError": {
+      "message": "❌ Documentación no cumple estándares - requiere corrección",
+      "level": "error"
+    }
+  },
+  "integration": {
+    "steeringRules": [
+      "documentacion-consistente.md"
+    ],
+    "relatedHooks": [
+      "update-component-docs",
+      "api-documentation-generator"
+    ]
+  }
+}

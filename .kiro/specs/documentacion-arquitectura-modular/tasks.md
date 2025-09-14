@@ -145,7 +145,6 @@
   - Crear configuración de hooks en .kiro/hooks/
   - _Requisitos: 6.1_
 
-
 - [x] 5.2 Crear hooks de documentación automática
 
   - Implementar hook update-component-docs que se ejecute al guardar componentes
@@ -171,16 +170,13 @@
 
 - [x] 6.1 Configurar reglas de nomenclatura y estructura
 
-
-
-
   - Crear steering rules para nombres de componentes, archivos y variables en español
   - Implementar reglas para estructura de carpetas modular
   - Configurar validación automática de patrones de importación
   - Crear reglas para prevenir dependencias circulares entre módulos
   - _Requisitos: 7.2_
 
-- [ ] 6.2 Implementar reglas de arquitectura y patrones
+- [x] 6.2 Implementar reglas de arquitectura y patrones
   - Crear reglas para mantener separación de capas (domain, application, infrastructure)
   - Implementar steering para uso correcto de principios SOLID
   - Configurar reglas para patrones de manejo de errores consistentes

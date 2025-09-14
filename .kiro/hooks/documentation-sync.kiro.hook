@@ -1,0 +1,108 @@
+{
+  "name": "documentation-sync",
+  "description": "Mantiene la documentación sincronizada con los cambios en el código fuente",
+  "version": "1.0.0",
+  "trigger": {
+    "type": "file-save",
+    "patterns": [
+      "src/components/**/*.tsx",
+      "src/modules/**/*.ts",
+      "src/hooks/**/*.ts",
+      "src/app/api/**/*.ts",
+      "types/**/*.ts"
+    ]
+  },
+  "conditions": [
+    {
+      "type": "file-exists",
+      "path": "${filePath}.docs.md"
+    }
+  ],
+  "actions": [
+    {
+      "type": "sync",
+      "name": "Sincronizar documentación con código",
+      "command": "node .kiro/scripts/sync-documentation.js",
+      "args": ["${filePath}"],
+      "options": {
+        "timeout": 45000,
+        "continueOnError": true
+      }
+    },
+    {
+      "type": "validate",
+      "name": "Validar documentación actualizada",
+      "command": "node .kiro/scripts/validate-updated-docs.js",
+      "args": ["${filePath}.docs.md"],
+      "options": {
+        "timeout": 20000,
+        "continueOnError": true
+      }
+    },
+    {
+      "type": "update-links",
+      "name": "Actualizar enlaces cruzados",
+      "command": "node .kiro/scripts/update-cross-references.js",
+      "args": ["${filePath}"],
+      "options": {
+        "timeout": 30000,
+        "continueOnError": true
+      }
+    }
+  ],
+  "settings": {
+    "syncOptions": {
+      "updateProps": true,
+      "updateExamples": false,
+      "updateTypes": true,
+      "updateImports": true,
+      "preserveCustomContent": true
+    },
+    "validationLevel": "warning",
+    "autoFix": {
+      "enabled": true,
+      "fixableIssues": [
+        "missing-props",
+        "outdated-types",
+        "broken-links",
+        "missing-imports"
+      ]
+    },
+    "crossReferences": {
+      "updateRelatedComponents": true,
+      "updateAPIReferences": true,
+      "updateModuleLinks": true,
+      "generateDependencyGraph": false
+    },
+    "preserveContent": {
+      "customExamples": true,
+      "businessNotes": true,
+      "implementationDetails": true,
+      "changelog": true
+    }
+  },
+  "notifications": {
+    "onSync": {
+      "message": "🔄 Documentación sincronizada para ${fileName}",
+      "level": "info"
+    },
+    "onOutdated": {
+      "message": "⚠️ Documentación desactualizada detectada en ${fileName}",
+      "level": "warning"
+    },
+    "onError": {
+      "message": "❌ Error sincronizando documentación para ${fileName}",
+      "level": "error"
+    }
+  },
+  "integration": {
+    "steeringRules": [
+      "documentacion-consistente.md"
+    ],
+    "relatedHooks": [
+      "documentation-validator",
+      "update-component-docs",
+      "api-documentation-generator"
+    ]
+  }
+}

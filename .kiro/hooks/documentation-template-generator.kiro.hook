@@ -1,0 +1,130 @@
+{
+  "name": "documentation-template-generator",
+  "description": "Genera plantillas de documentación automáticamente para nuevos componentes, APIs y módulos",
+  "version": "1.0.0",
+  "trigger": {
+    "type": "file-create",
+    "patterns": [
+      "src/components/**/*.tsx",
+      "src/modules/**/*.ts",
+      "src/app/api/**/*.ts",
+      "src/hooks/**/*.ts"
+    ]
+  },
+  "conditions": [
+    {
+      "type": "file-not-exists",
+      "path": "${filePath}.docs.md"
+    }
+  ],
+  "actions": [
+    {
+      "type": "generate",
+      "name": "Generar plantilla de documentación",
+      "command": "node .kiro/scripts/generate-doc-template.js",
+      "args": ["${filePath}", "${fileType}"],
+      "options": {
+        "timeout": 30000,
+        "continueOnError": false
+      }
+    },
+    {
+      "type": "analyze",
+      "name": "Extraer información del código",
+      "command": "node .kiro/scripts/extract-code-info.js",
+      "args": ["${filePath}"],
+      "options": {
+        "timeout": 20000,
+        "continueOnError": true
+      }
+    }
+  ],
+  "settings": {
+    "templates": {
+      "component": {
+        "path": ".kiro/templates/component-docs.template.md",
+        "placeholders": {
+          "componentName": "auto-extract",
+          "description": "auto-generate",
+          "props": "auto-extract",
+          "examples": "auto-generate"
+        }
+      },
+      "hook": {
+        "path": ".kiro/templates/hook-docs.template.md",
+        "placeholders": {
+          "hookName": "auto-extract",
+          "description": "auto-generate",
+          "parameters": "auto-extract",
+          "returnValue": "auto-extract"
+        }
+      },
+      "api": {
+        "path": ".kiro/templates/api-docs.template.md",
+        "placeholders": {
+          "endpointName": "auto-extract",
+          "method": "auto-extract",
+          "parameters": "auto-extract",
+          "responses": "auto-generate"
+        }
+      },
+      "module": {
+        "path": ".kiro/templates/module-docs.template.md",
+        "placeholders": {
+          "moduleName": "auto-extract",
+          "description": "auto-generate",
+          "entities": "auto-extract",
+          "services": "auto-extract"
+        }
+      }
+    },
+    "businessContext": {
+      "domain": "panaderia",
+      "examples": {
+        "products": [
+          "Pan Integral",
+          "Croissants de Mantequilla",
+          "Galletas de Chocolate",
+          "Torta de Chocolate"
+        ],
+        "categories": [
+          "panes",
+          "pasteles",
+          "galletas",
+          "temporada"
+        ],
+        "customers": [
+          "María González",
+          "Carlos Rodríguez",
+          "Ana Martínez"
+        ]
+      }
+    },
+    "autoGeneration": {
+      "includeBusinessExamples": true,
+      "generateMermaidDiagrams": true,
+      "includeAccessibilityNotes": true,
+      "generateTestingExamples": false
+    }
+  },
+  "notifications": {
+    "onSuccess": {
+      "message": "📝 Plantilla de documentación generada para ${fileName}",
+      "level": "info"
+    },
+    "onError": {
+      "message": "❌ Error generando plantilla de documentación para ${fileName}",
+      "level": "error"
+    }
+  },
+  "integration": {
+    "steeringRules": [
+      "documentacion-consistente.md",
+      "nomenclatura-espanol.md"
+    ],
+    "relatedHooks": [
+      "documentation-validator",
+      "update-component-docs"
+    ]
+  }
+}
