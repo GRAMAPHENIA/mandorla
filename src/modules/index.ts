@@ -4,13 +4,16 @@
  */
 
 // Módulo de Productos
-export * as Productos from './productos'
+export * as Productos from './productos';
 
 // Módulo de Carrito
-export * as Carrito from './carrito'
+export * as Carrito from './carrito';
 
 // Módulo de Pedidos
-export * as Pedidos from './pedidos'
+export * as Pedidos from './pedidos';
 
 // Módulo de Clientes
-export * as Clientes from './clientes'
+export * as Clientes from './clientes';
+
+// Módulo de Checkout (Integración)
+export * as Checkout from './checkout';

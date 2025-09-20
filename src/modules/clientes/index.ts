@@ -1,13 +1,16 @@
-// Exportaciones principales del módulo de clientes
+/**
+ * Exportaciones principales del módulo de clientes
+ * Proyecto Mandorla - Panadería E-commerce
+ */
 
-// Domain
-export * from './domain'
+// Domain exports
+export * from './domain';
 
-// Application
-export * from './application'
+// Application exports
+export * from './application';
 
-// Infrastructure
-export * from './infrastructure'
+// Infrastructure exports (se implementará en tareas posteriores)
+// export * from './infrastructure';
 
-// Presentation
-export * from './presentation'
+// Presentation exports (se implementará en tareas posteriores)
+// export * from './presentation';
